@@ -1,0 +1,9 @@
+{
+  "name": "stem-player",
+  "private": true,
+  "type": "module",
+  "description": "A song, held in your hand: a Three.js stem player for any song. Static page plus api/stems.js, a Vercel function for true stems.",
+  "dependencies": {
+    "@vercel/blob": "2.8.0"
+  }
+}
