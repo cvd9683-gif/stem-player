@@ -1,6 +1,6 @@
 # Stem Player
 
-Made for ITP's Shared Minds class (week 6). Open [`index.html`](index.html) in a browser; it needs no build step.
+Open [`index.html`](index.html) in a browser; it needs no build step.
 Serve the folder (for example `python3 -m http.server`) rather than opening the file
 directly, because the scripts are modules.
 
