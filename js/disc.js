@@ -325,6 +325,7 @@ export function createDisc(container) {
   const labelAt = i => toScreen(dirs[i].x * 1.2, dirs[i].z * 1.2, -0.02);
 
   const lean = { x: 0, z: 0, press: 0 };
+  const look = { x: 0, y: 0, on: 0 };
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let last = performance.now();
 
@@ -335,6 +336,13 @@ export function createDisc(container) {
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
     const ease = k => 1 - Math.exp(-dt * k);
+
+    // On the entry screen it turns to face the pointer, slowly, as if picked up to look at,
+    // and settles back when the pointer leaves. Eased gently so it feels like it has weight.
+    const gaze = state.gaze;
+    look.x += ((gaze ? gaze.x : 0) - look.x) * ease(3.5);
+    look.y += ((gaze ? gaze.y : 0) - look.y) * ease(3.5);
+    look.on += ((gaze ? 1 : 0) - look.on) * ease(2);
 
     // Lights. Each LED fills as the level passes it; lit ones pulse with the music;
     // unlit ones keep a faint breath of their layer so you can tell it is still there.
@@ -349,6 +357,9 @@ export function createDisc(container) {
         const ghost = state.loaded ? 0.05 + 0.12 * meter * (state.playing ? 1 : 0) : 0.05 + 0.05 * meter;
         let want = lit * pulse * 1.25 + (1 - lit) * ghost;
         if (state.focus === i) want += 0.12;
+        // The strip the pointer is pointing toward brightens, a little more toward its outer end.
+        const aim = Math.max(0, look.x * dirs[i].x + look.y * dirs[i].z);
+        want += 0.6 * aim * aim * (0.5 + 0.1 * k) * intro * look.on;
         // While true stems are being found, a slow wave of light runs out along every strip.
         if (state.separating) want += 0.45 * Math.max(0, Math.sin(now / 420 - k * 0.7 - i * 0.9)) ** 6;
         if (!state.fxMode && anySolo && !state.solo[i]) want *= 0.22;
@@ -403,10 +414,11 @@ export function createDisc(container) {
     const tilt = 0.035 + 0.035 * lean.press;
     // And, left alone, it sways a little, like something resting in a hand.
     const sway = calm ? 0 : 1;
-    disc.rotation.x = lean.z * tilt + sway * 0.03 * Math.sin(now / 2600);
-    disc.rotation.z = -lean.x * tilt + sway * 0.025 * Math.sin(now / 3400 + 1);
     intro += (introTarget - intro) * ease(introTarget ? 6 : 2.4);
-    disc.rotation.y = sway * intro * 0.55 * Math.sin(now / 3200);
+    const turn = intro * (calm ? 0.4 : 1);
+    disc.rotation.x = lean.z * tilt + sway * 0.03 * Math.sin(now / 2600) + turn * 0.3 * look.y;
+    disc.rotation.z = -lean.x * tilt + sway * 0.025 * Math.sin(now / 3400 + 1) - turn * 0.3 * look.x;
+    disc.rotation.y = sway * intro * 0.55 * Math.sin(now / 3200) * (1 - 0.7 * look.on) + turn * 0.35 * look.x;
     placeCamera();
     disc.position.y = -0.012 * lean.press;
 

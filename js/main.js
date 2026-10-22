@@ -576,6 +576,7 @@ function frame() {
     arrived: (performance.now() - stemsArrived) / 1000,
     touches: list.slice(0, 3),
     lean: lead && Math.hypot(lead.x, lead.z) < 1.15 ? { x: lead.x, z: lead.z, pressed: !!pressed } : null,
+    gaze: inIntro() && gaze.on ? gaze : null,
   });
 
   labels.forEach((el, i) => {
@@ -610,6 +611,15 @@ function frame() {
 // Going in, the disc comes forward, light runs out along its strips with a chime, and it plays.
 
 const demoReady = loadDemo();
+
+// Where the pointer is on the entry screen, from −1 to 1 each way, for the disc to turn toward.
+const gaze = { x: 0, y: 0, on: false };
+addEventListener('pointermove', e => {
+  gaze.x = e.clientX / innerWidth * 2 - 1;
+  gaze.y = e.clientY / innerHeight * 2 - 1;
+  gaze.on = true;
+});
+addEventListener('mouseout', e => { if (!e.relatedTarget) gaze.on = false; });
 const inIntro = () => document.body.classList.contains('intro');
 const introNote = (text, error = true) => {
   const note = $('#intro-note');
