@@ -140,7 +140,7 @@ function drawPreview(g, canvas, video, landmarks, hands) {
     // Name each hand at its wrist, so the panel and the disc can be matched up.
     const [wx, wy] = p(0);
     g.globalAlpha = 0.9;
-    g.font = '600 13px system-ui, sans-serif';
+    g.font = '700 12px "Helvetica Neue", Helvetica, Arial, sans-serif';
     g.textAlign = 'center';
     g.fillText(hands[k]?.side === 'left' ? 'L' : 'R', wx, Math.min(H - 6, wy + 18));
     g.globalAlpha = 1;

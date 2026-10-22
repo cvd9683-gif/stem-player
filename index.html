@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Stem Player</title>
 <link rel="icon" href="data:,">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="style.css">
 <script type="importmap">
 {
@@ -24,10 +21,9 @@
 <section id="intro" aria-labelledby="intro-title">
   <div class="intro-inner">
     <h2 id="intro-title">Stem Player</h2>
-    <p class="lede">A song, held in your hand.</p>
     <div class="actions">
-      <label class="btn primary" for="file" id="intro-song" tabindex="0">Bring a song</label>
-      <button id="intro-demo" class="btn" type="button">Play the demo</button>
+      <label class="btn primary" for="file" id="intro-song" tabindex="0">Load song</label>
+      <button id="intro-demo" class="btn" type="button">Demo</button>
     </div>
     <p class="note" id="intro-note" role="status"></p>
   </div>
@@ -49,16 +45,16 @@
 
 <p id="hint" role="status" aria-live="polite"></p>
 
-<div class="drop" aria-hidden="true"><p>Drop a song to hold it in your hand<br><small>or four stems, named vocals, drums, bass and other</small></p></div>
+<div class="drop" aria-hidden="true"><p>Drop song<small>Or four stems: vocals, drums, bass, other</small></p></div>
 
 <footer class="bar">
   <button id="play" type="button" aria-pressed="false">Play</button>
   <span id="time">0:00 / 0:00</span>
   <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Position in the song">
-  <button id="true-stems" type="button" hidden>Find true stems</button>
-  <label class="btn" for="file">Load a song</label>
+  <button id="true-stems" type="button" hidden>True stems</button>
+  <label class="btn" for="file">Load</label>
   <input id="file" type="file" accept="audio/*" multiple class="sr-only">
-  <button id="hands" type="button" aria-pressed="false">Use hands</button>
+  <button id="hands" type="button" aria-pressed="false">Hands</button>
 </footer>
 
 <aside id="cam" hidden>

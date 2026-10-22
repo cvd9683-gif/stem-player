@@ -15,7 +15,7 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 export const ARM_ANGLES = [90, 0, 270, 180];   // vocals up, drums right, bass down, other left
 export const COLORS = ['#ffd3a1', '#ff9478', '#8eaeff', '#a4ecbf'];
 const BODY = '#b89c84';
-const BACKGROUND = '#15120f';
+const BACKGROUND = '#000000';
 const WHITE = new THREE.Color('#fff4e8');
 const INK_IDLE = new THREE.Color('#6b5444');
 const INK_FOCUS = new THREE.Color('#2e2018');
@@ -284,16 +284,15 @@ export function createDisc(container) {
 
   // The entry screen: the disc further off and higher in the frame, turning slowly in the dark.
   // Leaving it, the disc comes forward to where it can be held.
-  // On a wide screen it sits to the right of the words; on a tall one, above them.
+  // It sits centred above the words, like a product shot.
   let baseDist = 4.7, aspect = 1.6;
   let intro = 1, introTarget = 1;
   function placeCamera() {
     const dist = baseDist * (1 + 0.5 * intro);
     const wide = aspect > 1.2;
-    const x = wide ? -0.75 * intro : 0;
-    const z = (wide ? 0.3 : 1.15) * intro * (baseDist / 4.7);
-    camera.position.set(x, dist * 0.68, dist * 0.73);
-    camera.lookAt(x, 0, z);
+    const z = (wide ? 0.45 : 0.75) * intro * (baseDist / 4.7);
+    camera.position.set(0, dist * 0.68, dist * 0.73);
+    camera.lookAt(0, 0, z);
   }
   new ResizeObserver(resize).observe(container);
   resize();
@@ -526,7 +525,7 @@ function textTexture(text) {
   canvas.width = 128; canvas.height = 64;
   const g = canvas.getContext('2d');
   g.fillStyle = '#ffffff';
-  g.font = `700 ${text.length > 2 ? 34 : 52}px "Bricolage Grotesque", system-ui, sans-serif`;
+  g.font = `700 ${text.length > 2 ? 30 : 52}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
   g.textAlign = 'center';
   g.textBaseline = 'middle';
   g.fillText(text, 64, 34);
