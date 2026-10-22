@@ -136,7 +136,7 @@ trueButton.addEventListener('click', async () => {
     separationProgress = null;
     document.title = 'Stem Player';
     trueButton.disabled = false;
-    trueButton.textContent = 'Find true stems';
+    trueButton.textContent = 'True stems';
     loaded();
   }
 });
@@ -322,7 +322,7 @@ function toggleSolo(i) {
   const soloed = STEMS.filter((_, k) => engine.solo[k]);
   // On the quick split, a soloed layer is a slice of the mix, so say why it isn't clean.
   if (soloed.length && engine.mode === 'carved') {
-    return say(`Solo: ${soloed.join(', ')}. This is the quick split, so other instruments bleed through; Find true stems separates them properly.`, 6000);
+    return say(`Solo: ${soloed.join(', ')}. This is the quick split, so other instruments bleed through; True stems separates them properly.`, 6000);
   }
   say(soloed.length ? `Solo: ${soloed.join(', ')}` : 'Solo off: every layer back.', 2000);
 }

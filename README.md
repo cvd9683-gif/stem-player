@@ -11,7 +11,7 @@ webcam and do the same in the air.
 
 ## How it works
 
-- **Any song.** Drop an audio file anywhere, or use *Load a song*. At first the four layers
+- **Any song.** Drop an audio file anywhere, or use *Load*. At first the four layers
   are carved out of the mix with filters, instantly (see *True stems* below for the real thing). Bass is everything
   low, drums is everything high (cymbals, hats, the crack of a snare), and the middle band is
   split by where it sits in the stereo image: the centre, where a lead voice usually is, is
@@ -24,7 +24,7 @@ webcam and do the same in the air.
 - **The lights.** Each strip's lights fill as you turn it up, and the lit ones pulse with
   what that layer is playing. A layer turned all the way down still breathes faintly, so you
   can see it is there before you bring it back.
-- **Hands.** *Use hands* turns on the webcam. Hand tracking (MediaPipe) runs entirely in the
+- **Hands.** *Hands* turns on the webcam. Hand tracking (MediaPipe) runs entirely in the
   browser; no video leaves the computer. Hover: hold your hand still over a strip and a ring
   closes in on it; after a moment the strip is yours. Slide along it, then move off to the
   side to let go. Hover over the middle to play or pause. A pinch takes hold instantly, for
@@ -60,7 +60,7 @@ hover on LOOP for as long as the loop should be, then move off.
 
 ## True stems
 
-On the hosted site, an uploaded song gets a **Find true stems** button. It sends the song to
+On the hosted site, an uploaded song gets a **True stems** button. It sends the song to
 Demucs (`htdemucs`) on Replicate, which separates it by instrument in a minute or two, for a
 few cents a song.
 The song keeps playing carved meanwhile, and a slow wave of light runs along the strips;
